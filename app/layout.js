@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import {FloatingShapes} from "@/components/floating-shapes";
 import Header from "@/components/header";
 import { ConvexClientProvider } from "@/components/convex-client-provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter=Inter({subsets:["latin"]});
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
          enableSystem
          disableTransitionOnChange
         >
+          <ClerkProvider>
           <ConvexClientProvider>
           <Header/>
           <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
@@ -33,6 +35,7 @@ export default function RootLayout({ children }) {
 
           </main>
           </ConvexClientProvider>
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
