@@ -3,11 +3,12 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { SignInButton, SignUpButton, UserButton,  } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { useStoreUser } from "@/hooks/use-store-user";
 import { BarLoader } from "react-spinners";
-import { Unauthenticated,Authenticated } from "convex/react";
+import { Unauthenticated, Authenticated } from "convex/react";
+import { LayoutDashboard } from "lucide-react";
 
 const Header = () => {
   const path = usePathname();
@@ -71,12 +72,17 @@ const Header = () => {
           </Unauthenticated>
 
           <Authenticated>
+            <Link href={"/dashboard"}>
+              <Button variant={"glass"} >
+                <LayoutDashboard className="h-4 w-4" />
+                <span className="hidden sm:flex">Dashboard</span>
+              </Button>
+            </Link>
             <UserButton
               appearance={{
                 elements: {
-                  avatarBox: "w-8 h-8"
-
-                }
+                  avatarBox: "w-8 h-8",
+                },
               }}
             />
           </Authenticated>
@@ -84,10 +90,7 @@ const Header = () => {
 
         {isLoading && (
           <div className="fixed bottom-0 left-0 w-full z-40 flex justify-center">
-            <BarLoader
-              width={"95%"}
-              color="#06b6d4"
-            />
+            <BarLoader width={"95%"} color="#06b6d4" />
           </div>
         )}
       </div>
